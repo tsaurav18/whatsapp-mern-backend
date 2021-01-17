@@ -7,7 +7,7 @@ import Pusher from "pusher"
 
 //app config
 const app = express()
-const port = process.env.PORT || 9000;
+const port = process.env.PORT || 9001;
 
 const pusher = new Pusher({
     appId: "1139013",
@@ -20,6 +20,7 @@ const db = mongoose.connection
 db.once('open', ()=>{
     console.log("db is connected")
     const msgCollection = db.collection('messagecontents');
+    console.log(msgCollection)
     const changeStream = msgCollection.watch();
     changeStream.on('change', (change)=>{
         console.log(change)
